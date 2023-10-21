@@ -1,0 +1,71 @@
+/*CSS*/
+
+body{
+    background-image: radial-gradient(rgb(103, 51, 116), rgb(68, 67, 60));
+    background-repeat: no-repeat;
+    position: relative;
+    min-height: 100vh;
+}
+
+#divbody{
+    padding-bottom: 2.5rem;
+}
+
+nav{
+    font-family: '@Bradley Hand ITC';
+    font-size: 28px;
+    background-color: rgba(19,19,19);
+    color: wheat;
+}
+
+nav ul li{
+    padding-left: 20px;
+    padding-top: 1px;
+}
+
+.nav-link{
+    color:white;
+}
+.nav-link:visited{
+    color:white;
+}
+.nav-link:hover{
+    color:orange;
+    box-shadow: purple 4px 4px 20px;
+}
+
+nav a img{
+    margin-top: -15px;
+    margin-bottom: -15px;
+    height: 60px;
+    width: 60px;
+    border-radius: 40px;
+}
+
+.card{
+    border-radius: 50%;
+    border-color: aliceblue;
+}
+.loginField{
+    margin-left: 140px;
+    border-radius: 8px;
+    height: 40px;
+}
+
+
+@media only screen and (max-width: 700px){
+    .card{
+        margin-top: 50px;
+       padding: 30px;
+    }
+    .loginLabel{
+        margin-left: 160px;
+    }
+    .loginField{
+        margin-left: 100px;
+    }
+    .loginButton{
+        margin-top: 40px;
+        margin-left: 160px;
+    }
+}
