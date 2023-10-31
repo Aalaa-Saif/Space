@@ -20,9 +20,11 @@ function NavPage(){
             <li className="nav-item">
                 <NavLink className="nav-link" to="/planets">Planets</NavLink>
             </li>
-
             <li className="nav-item">
-                <NavLink className="nav-link" to="/adminLogin">Login</NavLink>
+                <NavLink className="nav-link" to="/adminLogin">adminLogin</NavLink>
+            </li>
+            <li className="nav-item">
+                <NavLink className="nav-link" to="/userLogin">userLogin</NavLink>
             </li>
         </ul>
     </div>

@@ -1,0 +1,12 @@
+.body{
+    background-color: rgb(232, 235, 193);
+}
+.container{
+    padding:20px 0px 20px 0px;
+}
+.IDCard{
+    border: 1px solid rgb(88, 84, 84);
+    border-radius: 10px;
+    padding: 5px 5px 5px 5px;
+    width: 30%;
+}

@@ -1,43 +1,27 @@
 import { createContext, useContext,useState,useEffect, useReducer, useRef } from "react";
 import axios from "../api/axios";
 import { useLocation, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 
 const AuthContext = createContext({});
 
 export const AuthProvider = ({children}) =>{
-    const [user,setUser] = useState([]); //user in profile page
-    const [userIn,setUserIn] = useState();
-    const [userOut,setUserOut] = useState();
+    const [admin,setAdmin] = useState([]); //admin in dashboard page
     const [errors, setErrors] = useState([]);
     const navigate = useNavigate();
-    const location = useLocation();
     const [valueUpdate, forceUpdate] = useReducer(x => x + 1, 0);
-    //const redirectLogin = location.state?.from || 'profile';
 
     const csrf = () => axios.get("/sanctum/csrf-cookie/");
 
-    const getUser = async () => {
+    const getAdmin = async () => {
         await axios.get('/api/admin_profile/')
         .then(resp=>{
-            setUser(resp.data);
+            setAdmin(resp.data);
             console.log(resp.data.id);
-            localStorage.setItem("id",resp.data.name);
-            localStorage.getItem("id");
-
         });
     }
 
-    /*
-    const logIn = (email: string, password: string) => {
-    return servicesApi.get('/sanctum/csrf-cookie').then(() => {
-    return axios.post('auth/login', {
-        email,
-        password,
-    })
-    })
-    }
-    */
     const login = async ({...data}) => {
         await csrf();
         try{
@@ -45,8 +29,11 @@ export const AuthProvider = ({children}) =>{
             data,
             ).then(res => {
                 if(res.data.status == true){
-                    getUser();
+                    getAdmin();
+                    Cookies.set("adminName",res.data.admin["name"]);
+                    console.log(res.data.admin["name"]);
                     navigate("/dashboard");
+
                 }
             });
 
@@ -61,24 +48,63 @@ export const AuthProvider = ({children}) =>{
 
     const adminLogout =async () => {
         await axios.post('/api/admin_logout').then(() => {
-            setUser(null);
-            localStorage.setItem("id","undefined");
+            setAdmin(null);
+           Cookies.remove("adminName");
             navigate('/adminLogin');
         });
     }
 
+    const [user,setUser] = useState([]); //user in profile page
+
+    const getUser = async () => {
+        await axios.get('/api/user_profile/')
+        .then(resp=>{
+            setUser(resp.data);
+            //console.log(resp.data.id);
+
+        });
+    }
+
+    const userLogin = async ({...data}) => {
+        await csrf();
+        try{
+            axios.post("/api/user_check/",
+            data,
+            ).then(res => {
+                if(res.data.status == true){
+                    Cookies.set("userName",res.data.user["name"]);
+                    //getUser();
+                    navigate("/profile");
+                }
+            });
+        }
+         catch(e){
+            console.log(e);
+            /*if(e.response.status === 422){
+                setErrors(e.response.data.errors);
+            }*/
+        }
+    }
+
+    const userLogout =async () => {
+        await axios.post('/api/user_logout').then(() => {
+            setUser(null);
+            Cookies.remove("userName")
+            navigate('/userLogin');
+        });
+    }
 
   /*  useEffect(()=>{
         getUser();
         getUserPost();
     },[valueUpdate]);*/
-    useEffect(()=>{
-        getUser();
-    },[])
 
+useEffect(()=>{
+    getAdmin();
+    getUser();
+},[])
 
-
-    return <AuthContext.Provider value={{user, getUser, login,forceUpdate, adminLogout, userIn}}>
+    return <AuthContext.Provider value={{admin, login,forceUpdate, adminLogout, user, userLogin, userLogout, getAdmin, getUser}}>
         {children}
     </AuthContext.Provider>
 }
@@ -86,4 +112,3 @@ export const AuthProvider = ({children}) =>{
 export default function useAuthContext(){
     return useContext(AuthContext);
 }
-

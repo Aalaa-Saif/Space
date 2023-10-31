@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\Auth;
 
 use Auth;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class AdminAuthController extends Controller
 {
-    // View Profile
     public function profile(Request $request){
-        $user = Auth::user();
-        return response()->json($user);
+        $admin = Auth::guard('adminApi')->user();
+       // $admin = auth()->user();
+      // $token = PersonalAccessToken::where('token', $hashedToken)->first();
+      //$admin = auth('sanctum')->user();
+        return response()->json($admin);
     }
 }

@@ -4,15 +4,15 @@ import adminLogin from "../../../css/page/AdminLogin.module.css";
 import useAuthContext from "../context/AuthContext";
 import axios from "../api/axios";
 
-function AdminLogin(){
+function UserLogin(){
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const {login, getAdmin, admin} = useAuthContext();
+    const {userLogin, getUser} = useAuthContext();
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        login({email,password});
+        userLogin({email,password});
     }
 
     return(
@@ -20,7 +20,7 @@ function AdminLogin(){
             <div className="col-md-5 offset-md-3 mt-md-5">
 
                 <div className={"bg-dark "+adminLogin.card}>
-                    <div className="text-light text-center pt-md-4"><b><h4>Admin Login</h4></b></div>
+                    <div className="text-light text-center pt-md-4"><b><h4>User Login</h4></b></div>
                     <div className="card-body text-light">
                         <form onSubmit={handleLogin} className="py-md-3">
 
@@ -49,4 +49,4 @@ function AdminLogin(){
         </div>
     );
 }
-export default AdminLogin;
+export default UserLogin;
