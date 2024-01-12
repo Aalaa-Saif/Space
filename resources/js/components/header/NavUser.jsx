@@ -11,12 +11,13 @@ function NavUser(){
         e.preventDefault();
         userLogout();
     }
+
     const [search,setSearch] = useState("");
-    const searchHandler = (e) => {
+    const searchHandler = async (e) => {
         e.preventDefault();
         const data = new FormData();
         data.append('search', search);
-        axios.post("/api/user_profile", data) .then(resp=>{
+        await axios.post("/api/user_profile", data) .then(resp=>{
             setUser(resp.data.user);
             setUserPost(resp.data.post);
         });
