@@ -6,6 +6,7 @@ import useAuthContext from "../context/AuthContext";
 import Cookies from "js-cookie";
 
 const AdminLayout = () => {
+    const {admin} = useAuthContext();
 
     const adminCookie = Cookies.get("adminName");
 

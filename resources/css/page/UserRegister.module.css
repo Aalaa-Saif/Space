@@ -1,0 +1,28 @@
+.card{
+    border-radius: 30%;
+    border-color: aliceblue;
+    border: 2px solid white;
+}
+.loginField{
+    margin-left: 140px;
+    border-radius: 8px;
+    height: 40px;
+}
+
+.loginButton{
+    margin-left: 230px;
+}
+
+.input
+{
+    display: none;
+}
+
+.image_upload
+{   width: 30px;
+    cursor: pointer;
+    color: var(--white);
+    border-radius: 50%;
+    margin-left: 250px;
+    border-color: white;
+}

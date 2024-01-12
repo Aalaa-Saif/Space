@@ -13,7 +13,7 @@ class LogoutUserController extends Controller
         $cookie = Cookie::forget('jwt'); //to forget the cookie
 
         return response([
-           'message' => 'userToken deleted success'
+           'message' => 'userToken deleted successfully'
         ])->withCookie($cookie);  //the front-end doesn't have access to the cookie, cannot do any thing to the cookie
                                   //only thing that delete the cookie is the back-end
        }

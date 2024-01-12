@@ -1,21 +1,21 @@
 import React, {useEffect} from "react";
+import dashboard from "../../../css/pageAuthAdmin/Dashboard.module.css";
 import useAuthContext from "../context/AuthContext";
 
 function Dashboard(){
-    const {admin,getAdmin} = useAuthContext();
-    const {adminLogout} = useAuthContext();
-
-    const adminLogoutFunction =async (e) => {
-        e.preventDefault();
-        adminLogout();
-    }
+    const {admin} = useAuthContext();
 
 
     return(
         <div>
-            <p>jjjjjjjjjjjjjjjjjj</p>
-            <button onClick={adminLogoutFunction}>logout</button>
-           <h1>{admin.name}</h1>
+            <div className={"contentMove "+dashboard.cardMove}>
+                <div>
+                    <h1><i className="text-light"><u>Admin Dashboard</u></i></h1>
+                    <div className={dashboard.card}>
+                        <img src={`./img/admin/img/`+admin.photo} />
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

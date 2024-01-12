@@ -6,11 +6,11 @@ import useAuthContext from "../context/AuthContext";
 import Cookies from "js-cookie";
 
 const UserLayout = () => {
+    const {user} = useAuthContext();
 
     const userCookie = Cookies.get("userName");
 
-
-   return userCookie ? <><NavUser/><Outlet/></> : <><NavPage/><Navigate to="/userLogin"/></>
+    return userCookie ? <><NavUser/><Outlet/></> : <><NavPage/><Navigate to="/userLogin"/></>
 
 }
 

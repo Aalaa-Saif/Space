@@ -6,13 +6,16 @@ import Home from "./page/Home";
 import Planets from "./page/Planets";
 import AdminLogin from "./page/AdminLogin";
 import Dashboard from "./pageAuthAdmin/Dashboard";
-import News from "./pageAuthAdmin/News";
+import ForHome from "./pageAuthAdmin/ForHome";
+import ForPlanet from "./pageAuthAdmin/ForPlanet";
 import Profile from "./pageAuthUser/Profile";
 import UserLogin from "./page/UserLogin";
 import VisitLayout from "./layouts/VisitLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import UserLayout from "./layouts/UserLayout";
 import UserLogLayout from "./layouts/UserLogLayout";
+import UserRegister from "./page/UserRegister";
+
 
 const Space = () => {
 
@@ -27,12 +30,16 @@ const Space = () => {
                 </Route>
 
                 <Route element={<UserLogLayout/>}>
+
                     <Route path="/userLogin" element={<UserLogin/>} />
+                    <Route path="userRegister" element={<UserRegister/>} />
+
                 </Route>
 
                 <Route element={<AdminLayout/>}>
                     <Route path="/dashboard" element={<Dashboard/>} />
-                    <Route path="/news" element={<News/>} />
+                    <Route path="/forHome" element={<ForHome/>} />
+                    <Route path="/forPlanet" element={<ForPlanet/>} />
                 </Route>
 
                 <Route element={<UserLayout/>}>

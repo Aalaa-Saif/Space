@@ -38,19 +38,5 @@ class LoginController extends Controller
         $admin = Auth::guard('admin')->user();
         $admin ->api_token = $token;
         return $this->returnData("admin success", 'admin', $admin)->withCookie($cookie);
-
-
-       /* $admin = Admin::where('email', $request->email)->first();
-        if(! $admin || ! Hash::check($request->password, $admin->password)){
-            return response([
-                'status' => false,
-                'message'=> 'Admin Invalid credentials'
-            ],Response::HTTP_UNAUTHORIZED);
-        }
-        $token = $admin->createToken('admin_token',['role-admin'])->plainTextToken; //token that sanctum generate
-        $admin ->admin_token = $token;
-
-
-        return $this->returnData("admin success",'admin',$admin);*/
     }
 }

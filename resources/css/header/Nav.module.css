@@ -11,34 +11,33 @@ body{
     padding-bottom: 2.5rem;
 }
 
-nav{
+.nav{
     font-family: '@Bradley Hand ITC';
     font-size: 28px;
     background-color: rgba(19,19,19);
-    color: wheat;
 }
 
-nav ul li{
-    padding-left: 20px;
-    padding-top: 1px;
+.nav ul li{
+    padding-left: 30px;
+    padding-top: 4px;
 }
 
-.nav-link{
+.nav_link{
     color:white;
+    text-decoration: none;
 }
-.nav-link:visited{
-    color:white;
-}
-.nav-link:hover{
+
+.nav_link:hover{
     color:orange;
     box-shadow: purple 4px 4px 20px;
     border-radius: 50%;
 }
 
-nav a img{
+.nav a img{
     margin-top: -15px;
     margin-bottom: -15px;
     height: 60px;
     width: 60px;
     border-radius: 40px;
 }
+

@@ -9,6 +9,7 @@ use App\Http\Controllers\Page\DepartmentController;
 use App\Http\Controllers\AuthUser\UserAuthController;
 use App\Http\Controllers\AuthUser\LoginUserController;
 use App\Http\Controllers\AuthUser\LogoutUserController;
+use App\Http\Controllers\AuthUser\RegisterUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,6 @@ use App\Http\Controllers\AuthUser\LogoutUserController;
     Route::get('/dapInfo',[DepartmentController::class,'dapInfo']);
 
 
-
     Route::post('/login_check',[LoginController::class,'login_check']);
 
     Route::group(['middleware' => 'auth:sanctum','type.admin'], function() {
@@ -34,11 +34,16 @@ use App\Http\Controllers\AuthUser\LogoutUserController;
 
 
 
-
+    Route::post('/user_register',[RegisterUserController::class,'register']);
     Route::post('/user_check',[LoginUserController::class,'user_check']);
 
     Route::group(['middleware' => 'auth:sanctum','type.user'], function() {
-        Route::get('/user_profile',[UserAuthController::class,'profile']);
+        Route::post('/user_profile',[UserAuthController::class,'profile']);
+        Route::post('/user_editPhoto',[UserAuthController::class,'editPhoto']);
+        Route::post('/user_editName',[UserAuthController::class,'editName']);
+        Route::post('/user_deletePost',[UserAuthController::class,'delete']);
+        Route::post('/user_store_post',[UserAuthController::class,'store_post']);
+        Route::get('/user_store',[RegisterUserController::class,'store']);
         Route::post('/user_logout',[LogoutUserController::class,'logout']);
     });
 

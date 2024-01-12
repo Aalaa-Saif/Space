@@ -18,7 +18,7 @@ export const AuthProvider = ({children}) =>{
         await axios.get('/api/admin_profile/')
         .then(resp=>{
             setAdmin(resp.data);
-            console.log(resp.data.id);
+            console.log(resp.data);
         });
     }
 
@@ -49,18 +49,21 @@ export const AuthProvider = ({children}) =>{
     const adminLogout =async () => {
         await axios.post('/api/admin_logout').then(() => {
             setAdmin(null);
-           Cookies.remove("adminName");
+            Cookies.remove("adminName");
             navigate('/adminLogin');
         });
     }
 
+
     const [user,setUser] = useState([]); //user in profile page
+    const [userPost,setUserPost] = useState([]); //user post
 
     const getUser = async () => {
-        await axios.get('/api/user_profile/')
+        await axios.post('/api/user_profile/')
         .then(resp=>{
-            setUser(resp.data);
-            //console.log(resp.data.id);
+            setUser(resp.data.user);
+            setUserPost(resp.data.post);
+            //console.log(resp.data);
 
         });
     }
@@ -72,8 +75,8 @@ export const AuthProvider = ({children}) =>{
             data,
             ).then(res => {
                 if(res.data.status == true){
+                    getUser();
                     Cookies.set("userName",res.data.user["name"]);
-                    //getUser();
                     navigate("/profile");
                 }
             });
@@ -99,12 +102,12 @@ export const AuthProvider = ({children}) =>{
         getUserPost();
     },[valueUpdate]);*/
 
-useEffect(()=>{
-    getAdmin();
-    getUser();
-},[])
+    useEffect(()=>{
+        getAdmin();
+        getUser();
+    },[valueUpdate]);
 
-    return <AuthContext.Provider value={{admin, login,forceUpdate, adminLogout, user, userLogin, userLogout, getAdmin, getUser}}>
+    return <AuthContext.Provider value={{admin, login,forceUpdate, adminLogout, user, userLogin,userPost, userLogout, getAdmin, getUser,setUser,setUserPost}}>
         {children}
     </AuthContext.Provider>
 }
