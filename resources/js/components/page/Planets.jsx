@@ -29,6 +29,7 @@ const Planets = () => {
                 return(
                     <div key={row.id}>
                         <p onClick={clicknavigate}>{row.name}</p>
+                        <textarea id="editName" type="text" name="text" defaultValue={row.name} />
                     </div>
                 )
             })}

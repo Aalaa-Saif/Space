@@ -16,6 +16,7 @@ class UserAuthController extends Controller
 {
     use PhotoTrait;
 
+    #get data from DB to profile page
     public function profile(Request $request){
          $user = Auth::guard('userApi')->user();
 
@@ -37,11 +38,31 @@ class UserAuthController extends Controller
 
     public function store_post(Request $request){
        $user_id = Auth::guard('userApi')->user()->id;
+       if(!$request->text){
+        $user_post = Userpost::create([
+            'user_id' => $user_id,
+            'text' => " ",
+           ]);
+
+            if($request->has('image')){
+                foreach($request->file('image') as $img){
+                    $img_ext = $img->extension();
+                    $img_name = time().rand(1,4000).'.'.$img_ext;
+                    $path = 'img//user/postimg';
+                    $img ->move($path,$img_name);
+                    Userpostimg::create([
+                        'userpost_id' => $user_post->id,
+                        'image' => $img_name
+                    ]);
+                }
+            }
+
+       }
+
        $user_post = Userpost::create([
         'user_id' => $user_id,
         'text' => $request->text,
        ]);
-
 
         if($request->has('image')){
             foreach($request->file('image') as $img){
@@ -49,7 +70,6 @@ class UserAuthController extends Controller
                 $img_name = time().rand(1,4000).'.'.$img_ext;
                 $path = 'img//user/postimg';
                 $img ->move($path,$img_name);
-
                 Userpostimg::create([
                     'userpost_id' => $user_post->id,
                     'image' => $img_name
@@ -63,6 +83,7 @@ class UserAuthController extends Controller
         ]);
     }
 
+    #for edit profile photo
     public function editPhoto(Request $request){
         $profile_update = User::find($request->id);
         if(!$profile_update)
@@ -71,8 +92,7 @@ class UserAuthController extends Controller
             "msg"=>"ID not Found"
         ]);
 
-         //update
-         if($request->has('photo')){
+        if($request->has('photo')){
             $path = public_path('/img/user/img/'.$profile_update->photo);
             if(File::exists($path)){
                 File::delete($path);
@@ -89,14 +109,13 @@ class UserAuthController extends Controller
 
         $profile_update->photo = $img_name;
         $profile_update->update();
-
         return response()->json([
             "status"=>true,
             "msg"=>__('Photo Updated Successfully')
         ]);
-
     }
 
+    #for edit profile name
     public function editName(Request $request){
         $profile_update = User::find($request->id);
         if(!$profile_update)
@@ -104,8 +123,12 @@ class UserAuthController extends Controller
             "status"=>false,
             "msg"=>"ID not Found"
         ]);
-
-        $profile_update->name = $request->name;
+        if($request->name != null){
+            $profile_update->name = $request->name;
+        }
+        else{
+            $profile_update->name = $profile_update->name;
+        }
         $profile_update->update();
 
         return response()->json([
@@ -115,7 +138,8 @@ class UserAuthController extends Controller
 
     }
 
-    public function delete(Request $request){
+
+    public function deletePost(Request $request){
         $delete = Userpost::find($request->id);
         if (!$delete)
         return response()->json([
@@ -135,5 +159,70 @@ class UserAuthController extends Controller
             "id"=>$request->id
         ]);
     }
+
+    public function editPost(Request $request){
+        $edit = Userpost::find($request->id);
+        if(!$edit){
+            return response()->json([
+                "status"=>false,
+                "msg"=>"ID not Found"
+            ]);
+        }
+
+        $edit = Userpost::select('id','text')->with('userpostimgs')->find($request->id);
+        return response()->json($edit);
+    }
+
+    public function updatePost(Request $request){
+        $update = Userpost::find($request->id);
+        $input = $request->all();
+        if(!$update)
+        return response()->json([
+            "status"=>false,
+            "msg"=>"ID not Found"
+        ]);
+        if($request->has('image')){
+            foreach($request->file('image') as $img){
+                $img_ext = $img->extension();
+                $img_name = time().rand(1,4000).'.'.$img_ext;
+                $path = 'img/user/postimg';
+                $img ->move($path,$img_name);
+
+                Userpostimg::create([
+                    'userpost_id' => $update->id,
+                    'image' => $img_name
+                ]);
+            }
+        }
+        $update->update($input);
+
+        return response()->json([
+            "status"=>true,
+            "msg"=>"update post done"
+            //"msg"=>__('edit post Updated Successfully')
+        ]);
+    }
+
+    public function deleteEditImgPost(Request $request){
+        $id = Userpostimg::find($request->id);
+        if (!$id)
+        return response()->json([
+            "status"=>false,
+        ]);
+            //foreach($delete->userpostimgs as $img){
+                $path = public_path('img/user/postimg/'.$id->image);
+                if(File::exists($path)){
+                 File::delete($path);
+                }
+           // }
+
+        $id->delete();
+
+        return response()->json([
+            "status"=>true,
+            "id"=>$request->id
+        ]);
+    }
+
 
 }

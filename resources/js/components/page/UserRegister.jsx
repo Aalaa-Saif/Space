@@ -38,7 +38,7 @@ const UserRegister = () => {
 
     return(
         <div>
-        <div className="col-md-5 col-lg-5 col-sm-5 col-xl-5 offset-md-3 my-md-5">
+        <div className="col-md-5 col-lg-5 col-sm-5 col-5 offset-md-3 my-md-5">
 
             <div className={"bg-dark "+userRegister.card}>
                 <div className="text-light text-center pt-md-4"><b><h4>Register</h4></b></div>

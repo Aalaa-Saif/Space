@@ -22,6 +22,10 @@ use App\Http\Controllers\AuthUser\RegisterUserController;
 |
 */
 
+    Route::get('/get_test',[AdminAuthController::class,'getTest']);
+    Route::post('/post_test',[AdminAuthController::class,'postTest']);
+
+
     Route::get('/dapInfo',[DepartmentController::class,'dapInfo']);
 
 
@@ -33,7 +37,6 @@ use App\Http\Controllers\AuthUser\RegisterUserController;
     });
 
 
-
     Route::post('/user_register',[RegisterUserController::class,'register']);
     Route::post('/user_check',[LoginUserController::class,'user_check']);
 
@@ -41,9 +44,14 @@ use App\Http\Controllers\AuthUser\RegisterUserController;
         Route::post('/user_profile',[UserAuthController::class,'profile']);
         Route::post('/user_editPhoto',[UserAuthController::class,'editPhoto']);
         Route::post('/user_editName',[UserAuthController::class,'editName']);
-        Route::post('/user_deletePost',[UserAuthController::class,'delete']);
+        Route::post('/user_deletePost',[UserAuthController::class,'deletePost']);
+        Route::post('/user_deleteEditImgPost',[UserAuthController::class,'deleteEditImgPost']);
+        Route::post('/user_editPost',[UserAuthController::class,'editPost']);
+        Route::post('/user_updatePost',[UserAuthController::class,'updatePost']);
         Route::post('/user_store_post',[UserAuthController::class,'store_post']);
         Route::get('/user_store',[RegisterUserController::class,'store']);
         Route::post('/user_logout',[LogoutUserController::class,'logout']);
+
+
     });
 

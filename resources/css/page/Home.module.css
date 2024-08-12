@@ -21,3 +21,36 @@
     width: 40%;
 }
 
+
+
+.editPostClose{
+    position: absolute;
+    top: 20px;
+    right: 300px;
+    transition: 0.3s;
+    font-size: 80px;
+    color: rgb(19, 16, 16);
+}
+
+.editPostClose:hover{
+    cursor: pointer;
+    color: rgb(66, 107, 184);
+}
+
+
+.editPostOpen{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(243, 234, 234); /* Black w/ opacity */
+}
+
+.editPostOpen {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}

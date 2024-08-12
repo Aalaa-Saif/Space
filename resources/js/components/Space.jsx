@@ -9,6 +9,7 @@ import Dashboard from "./pageAuthAdmin/Dashboard";
 import ForHome from "./pageAuthAdmin/ForHome";
 import ForPlanet from "./pageAuthAdmin/ForPlanet";
 import Profile from "./pageAuthUser/Profile";
+import Post from "./pageAuthUser/Post";
 import UserLogin from "./page/UserLogin";
 import VisitLayout from "./layouts/VisitLayout";
 import AdminLayout from "./layouts/AdminLayout";
@@ -44,6 +45,7 @@ const Space = () => {
 
                 <Route element={<UserLayout/>}>
                     <Route path="/profile" element={<Profile/>} />
+                    <Route path="/post" element={<Post/>} />
                 </Route>
             </Routes>
         </div>
