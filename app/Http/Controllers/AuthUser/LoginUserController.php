@@ -9,13 +9,14 @@ use App\Traits\GeneralReturn;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Requests\userRequest;
 
 class LoginUserController extends Controller
 {
     use GeneralReturn;
 
     #Login Check
-    public function user_check(Request $request){
+    public function user_check(userRequest $request){
 
         #validation
 
@@ -28,7 +29,6 @@ class LoginUserController extends Controller
                'message'=> 'Admin Invalid credentials'
            ], Response::HTTP_UNAUTHORIZED);
        }
-
 
        $user = Auth::guard('web')->user();
        $token = $user->createToken('token', ['role-user'])->plainTextToken; //token that sanctum generate

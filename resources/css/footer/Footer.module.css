@@ -1,0 +1,11 @@
+.footer{
+    background-color: rgb(24, 23, 23);
+    color: white;
+    position: absolute;
+    width: 100%;
+
+}
+.footer_font{
+    font-size: 18px;
+    color: aliceblue;
+}

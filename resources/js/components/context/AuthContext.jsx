@@ -8,6 +8,8 @@ const AuthContext = createContext({});
 
 export const AuthProvider = ({children}) =>{
     const [admin,setAdmin] = useState([]); //admin in dashboard page
+    const [user,setUser] = useState([]); //user in profile page
+    const [userPost,setUserPost] = useState([]); //user post
     const [errors, setErrors] = useState([]);
     const navigate = useNavigate();
     const [valueUpdate, forceUpdate] = useReducer(x => x + 1, 0);
@@ -33,14 +35,14 @@ export const AuthProvider = ({children}) =>{
                     Cookies.set("adminName",res.data.admin["name"]);
                     console.log(res.data.admin["name"]);
                     navigate("/dashboard");
-
                 }
             });
-
         }
          catch(e){
-            console.log(e);
-            /*if(e.response.status === 422){
+             console.log(e);
+             console.log("admin hiiiiiiiiiiiiii");
+             /*
+            if(e.response.status === 422){
                 setErrors(e.response.data.errors);
             }*/
         }
@@ -55,8 +57,7 @@ export const AuthProvider = ({children}) =>{
     }
 
 
-    const [user,setUser] = useState([]); //user in profile page
-    const [userPost,setUserPost] = useState([]); //user post
+   //User ##############################################3
 
     const getUser = async () => {
         await axios.post('/api/user_profile/')
@@ -64,14 +65,14 @@ export const AuthProvider = ({children}) =>{
             setUser(resp.data.user);
             setUserPost(resp.data.post);
             //console.log(resp.data);
-
         });
     }
 
     const userLogin = async ({...data}) => {
         await csrf();
+
         try{
-            axios.post("/api/user_check/",
+            await axios.post("/api/user_check/",
             data,
             ).then(res => {
                 if(res.data.status == true){
@@ -80,12 +81,10 @@ export const AuthProvider = ({children}) =>{
                     navigate("/profile");
                 }
             });
-        }
-         catch(e){
-            console.log(e);
-            /*if(e.response.status === 422){
+        }catch(e){
+            if(e.response.status === 422){
                 setErrors(e.response.data.errors);
-            }*/
+            }
         }
     }
 
@@ -97,17 +96,12 @@ export const AuthProvider = ({children}) =>{
         });
     }
 
-  /*  useEffect(()=>{
-        getUser();
-        getUserPost();
-    },[valueUpdate]);*/
-
     useEffect(()=>{
         getAdmin();
         getUser();
     },[valueUpdate]);
 
-    return <AuthContext.Provider value={{admin, login,forceUpdate, adminLogout, user, userLogin,userPost, userLogout, getAdmin, getUser,setUser,setUserPost}}>
+    return <AuthContext.Provider value={{admin, login,forceUpdate, adminLogout, user, userLogin, errors, userPost, userLogout, getAdmin, getUser,setUser,setUserPost}}>
         {children}
     </AuthContext.Provider>
 }

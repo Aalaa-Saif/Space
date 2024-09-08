@@ -1,40 +1,39 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import planet from "../../../css/page/Planets.module.css";
 import axios from "../api/axios";
-import { Navigate, useNavigate } from "react-router-dom";
+import $ from 'jquery';
 
 
 const Planets = () => {
-    const [depData, setDepData] = useState([]);
-    const navigate = useNavigate();
+    //const [depData, setDepData] = useState([]);
 
-    const clicknavigate = (e) =>{
-        e.preventDefault();
-       navigate("/");
-    }
-//onClick={() => navigate('/')}
-    useEffect(()=>{
+    //onClick={() => navigate('/')}
+   /* useEffect(()=>{
         axios.get('/api/dapInfo')
        .then(resp => {
            setDepData(resp.data);
        });
 
-    },[])
+    },[]);*/
+    useEffect(()=>{
+        if(window.innerHeight > 600){
+            $('#footer' ).css("bottom","auto");
+        }
+    },[]);
 
     return(
         <div>
-            <div className="container">
-            <h1>Planets</h1>
-            <p>jjjjjjjjjjjj</p>
-            {depData.map(row=>{
-                return(
-                    <div key={row.id}>
-                        <p onClick={clicknavigate}>{row.name}</p>
-                        <textarea id="editName" type="text" name="text" defaultValue={row.name} />
-                    </div>
-                )
-            })}
+            <div>
+                <div className={planet.background}>
+                <h1 className="text-light text-center">P l a n e t s</h1>
+                <div className={"offset-md-1 "+planet.divCenter}>
+                    <p className={planet.textSize}>dddddddddddddd</p>
+                </div>
+                <br/><br/>
 
+                </div>
             </div>
+
 
         </div>
 

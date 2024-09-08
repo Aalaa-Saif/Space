@@ -1,0 +1,20 @@
+.background{
+    background-image: url("./img/space.jpg");
+    background-repeat:repeat-x;
+    background-size:auto;
+    width:100%;
+    height: auto;
+}
+
+.divCenter{
+    background-color: aliceblue;
+    opacity: 0.6;
+    width: 80%;
+    height: 450px;
+    padding: 8px 10px 10px 10px;
+    border-radius: 6px;
+}
+
+.textSize{
+    font-size: 20px;
+}

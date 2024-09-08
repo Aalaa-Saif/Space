@@ -31,10 +31,8 @@ const Space = () => {
                 </Route>
 
                 <Route element={<UserLogLayout/>}>
-
                     <Route path="/userLogin" element={<UserLogin/>} />
                     <Route path="userRegister" element={<UserRegister/>} />
-
                 </Route>
 
                 <Route element={<AdminLayout/>}>
@@ -47,6 +45,7 @@ const Space = () => {
                     <Route path="/profile" element={<Profile/>} />
                     <Route path="/post" element={<Post/>} />
                 </Route>
+
             </Routes>
         </div>
 
