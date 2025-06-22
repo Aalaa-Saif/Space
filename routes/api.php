@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\AdminAuthController;
-use App\Http\Controllers\Page\DepartmentController;
+use App\Http\Controllers\Page\PagesController;
 use App\Http\Controllers\AuthUser\UserAuthController;
 use App\Http\Controllers\AuthUser\LoginUserController;
 use App\Http\Controllers\AuthUser\LogoutUserController;
@@ -22,23 +22,29 @@ use App\Http\Controllers\AuthUser\RegisterUserController;
 |
 */
 
-    Route::get('/get_test',[AdminAuthController::class,'getTest']);
-    Route::post('/post_test',[AdminAuthController::class,'postTest']);
 
-
-    Route::get('/dapInfo',[DepartmentController::class,'dapInfo']);
+    Route::get('/dapInfo',[PagesController::class,'dapInfo']);
+    Route::get('/get_planet',[PagesController::class,'get_planet']);
+    Route::get('/get_home',[PagesController::class,'get_home']);
 
 
     Route::post('/login_check',[LoginController::class,'login_check']);
 
     Route::group(['middleware' => 'auth:sanctum','type.admin'], function() {
         Route::get('/admin_profile',[AdminAuthController::class,'profile']);
+        Route::post('/admin_store_planet',[AdminAuthController::class,'store_planet']);
+        Route::post('/admin_store_home',[AdminAuthController::class,'store_home']);
+
         Route::post('/admin_logout',[LogoutController::class,'logout']);
     });
 
 
     Route::post('/user_register',[RegisterUserController::class,'register']);
     Route::post('/user_check',[LoginUserController::class,'user_check']);
+
+    Route::group(['middleware' => 'auth:sanctum','type.admin'], function() {
+        Route::post('/planet_data',[AdminAuthController::class,'planetData']);
+    });
 
     Route::group(['middleware' => 'auth:sanctum','type.user'], function() {
         Route::post('/user_profile',[UserAuthController::class,'profile']);
@@ -51,7 +57,5 @@ use App\Http\Controllers\AuthUser\RegisterUserController;
         Route::post('/user_store_post',[UserAuthController::class,'store_post']);
         Route::get('/user_store',[RegisterUserController::class,'store']);
         Route::post('/user_logout',[LogoutUserController::class,'logout']);
-
-
     });
 

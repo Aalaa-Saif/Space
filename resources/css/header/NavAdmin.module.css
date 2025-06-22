@@ -1,48 +1,38 @@
 .sidebar{
-    background-color: darkcyan;
-    width: 0px;
-    height: 100%;
-    border-bottom-right-radius: 30px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    overflow-x: hidden;
+    background-color: rgb(24, 61, 61);
     transition: 0.9s;
 }
 
 .sidebar ul{
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .sidebar ul li{
     padding-left: 30px;
-    padding-top: 5px;
+    padding-top: 20px;
     font-size: 30px;
 }
 
 .sidebar_link{
-    color: rgb(141, 77, 77);
+    color:rgb(189, 189, 173);
     text-decoration: none;
 }
 
 .sidebar_link:hover{
-    color: rgb(57, 49, 100);
+    color: snow;
 }
 
-.sidebtn{
-    margin-left: 0px;
-}
-
-.closedash{
-    position: absolute;
-    top: 0;
-    right: 25px;
+.navbrand{
+    margin-left: 40%;
     font-size: 30px;
-    color:rgb(15, 12, 12);
-    transition: 0.3s;
-    cursor: pointer;
 }
-.closedash:hover{
-    color: blanchedalmond;
+.closeR{
+    margin-left: 90%;
 }
 
+@media only screen and (max-width: 700px){
+    .navbrand{
+        margin-left: 25%;
+    }
+
+}

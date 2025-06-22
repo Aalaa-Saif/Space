@@ -3,6 +3,7 @@ import $ from 'jquery';
 import navAdmin from "../../../css/header/NavAdmin.module.css";
 import { NavLink } from "react-router-dom";
 import useAuthContext from "../context/AuthContext";
+import nav from "../../../css/header/NavUser.module.css";
 
 function NavAdmin(){
     const {adminLogout} = useAuthContext();
@@ -12,58 +13,45 @@ function NavAdmin(){
         adminLogout();
     }
 
-    const closeSidebar = () => {
-        $('.' + navAdmin.sidebar).css("width","0");
-        $('.' + navAdmin.sidebtn).css({
-            "marginLeft":"0",
-            "transition":"all 0.9s"
-        });
-        $('.contentMove').css({
-            "marginLeft":"200px",
-            "transition":"all 0.9s"
-        });
-    }
-
-    const clickSidebtn = () => {
-        $('.' + navAdmin.sidebar).css("width","250px");
-        $('.' + navAdmin.sidebar).css("display","block");
-        $('.' + navAdmin.sidebtn).css({
-            "marginLeft":"250px",
-            "transition":"all 0.9s"
-        });
-        $('.contentMove').css({
-            "marginLeft":"250px",
-            "transition":"all 0.9s"
-        });
-    }
 
     return(
         <div>
 
-            <div className={navAdmin.sidebar}>
+        <nav className={"navbar navbar-dark bg-dark fixed-top "+navAdmin.sidebar}>
+            <div className="container-fluid">
+            <NavLink className={"navbar-brand "+navAdmin.navbrand} to="/dashboard">Admin Dashboard</NavLink>
 
-                <div className={"close "+navAdmin.closedash} onClick={closeSidebar}>
-                    <span >&times;</span>
-                </div>
-
-                <ul className={"navbar-nav"}>
-                    <li className="nav-item">
+            <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="offcanvas offcanvas-end text-bg-dark" tabIndex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+              <div className="offcanvas-header">
+                <button type="button" className={"btn-close btn-close-white "+navAdmin.closeR} data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div className="offcanvas-body">
+                <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li className="nav-item">
                         <NavLink className={navAdmin.sidebar_link} to="/forHome">Home</NavLink>
                     </li>
                     <li className="nav-item">
                         <NavLink className={navAdmin.sidebar_link} to="forPlanet">Planets</NavLink>
                     </li>
-                    <li className="nav-item">
+
+                   <li>
+                    <hr className={nav.hr}/>
+                   </li>
+                   <li className="nav-item">
                         <NavLink className={navAdmin.sidebar_link} to="/logout" onClick={adminLogoutFunction}>logout</NavLink>
                     </li>
                 </ul>
+              </div>
             </div>
+          </div>
+        </nav>
+        <br/><br/>
 
-            <button className={"navbar-toggler bg-dark navbar-dark border border-light "+navAdmin.sidebtn} onClick={clickSidebtn} type="button">
-                <span className="navbar-toggler-icon"></span>
-            </button>
+                </div>
 
-        </div>
     );
 }
 export default NavAdmin;

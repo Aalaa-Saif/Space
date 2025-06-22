@@ -1,20 +1,19 @@
 .background{
-    background-image: url("./img/space.jpg");
-    background-repeat:repeat-x;
-    background-size:auto;
-    width:100%;
-    height: auto;
+    background-image: url("./img/P names.jpg");
+    background-repeat:no-repeat;
+    background-size: 100% 100%;
+
 }
 
 .divCenter{
     background-color: aliceblue;
     opacity: 0.6;
-    width: 80%;
+    width: auto;
     height: 450px;
     padding: 8px 10px 10px 10px;
     border-radius: 6px;
 }
 
-.textSize{
-    font-size: 20px;
+@media only screen and (max-width: 600px){
+
 }

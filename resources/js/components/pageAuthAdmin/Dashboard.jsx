@@ -11,9 +11,14 @@ function Dashboard(){
         <div>
             <div className={"contentMove "+dashboard.cardMove}>
                 <div>
-                    <h1><i><NavLink className={dashboard.adminDashLink} to="/dashboard">Admin Dashboard</NavLink></i></h1>
-                    <div className={dashboard.card}>
-                        <img src={`./img/admin/img/`+admin.photo} />
+
+                    <div className={"container "+ dashboard.card}>
+                        <div className={dashboard.divLeft}>
+                            <img src={`./img/admin/img/`+admin.photo} />
+                        </div>
+                        <div className={dashboard.divRight}>
+                            <h2>{admin?.name}</h2>
+                        </div>
                     </div>
                 </div>
             </div>

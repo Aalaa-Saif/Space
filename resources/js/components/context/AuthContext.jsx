@@ -8,6 +8,7 @@ const AuthContext = createContext({});
 
 export const AuthProvider = ({children}) =>{
     const [admin,setAdmin] = useState([]); //admin in dashboard page
+    //const [adminPlanet,setAdminPlanet] = useState([]); //admin for upload planets data
     const [user,setUser] = useState([]); //user in profile page
     const [userPost,setUserPost] = useState([]); //user post
     const [errors, setErrors] = useState([]);
@@ -20,6 +21,7 @@ export const AuthProvider = ({children}) =>{
         await axios.get('/api/admin_profile/')
         .then(resp=>{
             setAdmin(resp.data);
+           // setAdminPlanet(resp.data.planet);
             console.log(resp.data);
         });
     }
@@ -64,7 +66,7 @@ export const AuthProvider = ({children}) =>{
         .then(resp=>{
             setUser(resp.data.user);
             setUserPost(resp.data.post);
-            //console.log(resp.data);
+            console.log(resp.data);
         });
     }
 
@@ -95,6 +97,7 @@ export const AuthProvider = ({children}) =>{
             navigate('/userLogin');
         });
     }
+
 
     useEffect(()=>{
         getAdmin();

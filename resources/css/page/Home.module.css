@@ -1,39 +1,33 @@
-.h1{
-    color: rgb(50, 143, 104);
+.background{
+    background-color: black;
+    background-repeat: no-repeat;
+    position: relative;
+    min-height: 100vh;
 }
 
-.img{
-    width: 40%;
+.textCenter{
+   text-align: center;
+   color: snow;
+   font-family: "OCR A Std";
 }
 
-.editPostClose{
-    position: absolute;
-    top: 20px;
-    right: 300px;
-    transition: 0.3s;
-    font-size: 80px;
-    color: rgb(19, 16, 16);
+.divMove{
+    margin-top: 20px;
+    border: 2px dashed darkblue;
+    padding-left: 40px;
+    border-radius: 50%;
 }
 
-.editPostClose:hover{
-    cursor: pointer;
-    color: rgb(66, 107, 184);
+.divMoveImg{
+    width: 200px;
+    height: 200px;
+
+    border-radius: 50%;
 }
-
-
-.editPostOpen{
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    background-color: rgba(243, 234, 234); /* Black w/ opacity */
-}
-
-.editPostOpen {
-    animation-name: zoom;
-    animation-duration: 0.6s;
+@media only screen and (max-width: 700px){
+    .divMove{
+        margin-top: 20px;
+        margin-left: 110px;
+        width:280px;
+    }
 }

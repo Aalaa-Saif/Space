@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use Auth;
 use File;
+use App\Models\Home;
 use App\Models\test;
+use App\Models\Planet;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Laravel\Sanctum\PersonalAccessToken;
@@ -12,46 +14,7 @@ use Laravel\Sanctum\PersonalAccessToken;
 class AdminAuthController extends Controller
 {
 
-    public function getTest(){
-
-        test::all();
-
-        $edit = test::all();
-        return response()->json($edit);
-
-    }
-
-    public function postTest(Request $request){
-        $post = test::find($request->id);
-        if(!$post){
-            return response()->json([
-                "status"=>false,
-                "msg"=>"ID not Found"
-            ]);
-        }
-
-        if($request->text != null){
-            $post->text = $request->text;
-        }
-        else{
-            $post->text = $post->text;
-        }
-
-        if($request->info != null){
-            $post->info = $request->info;
-        }
-        else{
-            $post->info = $post->info;
-        }
-
-        if($request->word != null){
-            $post->word = $request->word;
-        }
-        else{
-            $post->word = $post->word;
-        }
-        $post->update();
-
+    public function postTest(){
 
     }
 
@@ -61,6 +24,11 @@ class AdminAuthController extends Controller
        //$admin = auth('sanctum')->user();
 
         $admin = Auth::guard('adminApi')->user();
+      /*  $planet = Planet::create([
+            'text' => $request->text,
+        ]);*/
+       // $planet = Planet::all()->where('admin_id',Auth::guard('adminApi')->user()->id);
+        //$data = ["admin"=>$admin,"planet"=>$planet];
         return response()->json($admin);
     }
 
@@ -98,5 +66,45 @@ class AdminAuthController extends Controller
 
     }
 
+    public function store_planet(Request $request){
+        $admin_id = Auth::guard('adminApi')->user()->id;
+        if(!$request->text){
+         $admin_planet = Planet::create([
+             'text' => " ",
+            ]);
+
+            }
+            $admin_planet = Planet::create([
+                'text' => $request->text,
+               ]);
+
+                return response() ->json([
+                    "status"=>true,
+                    "msg"=>"success planet data uploaded",
+                ]);
+
+        }
+    public function store_home(Request $request){
+        $admin_id = Auth::guard('adminApi')->user()->id;
+        if(!$request->text){
+         $admin_planet = Home::create([
+             'text' => " ",
+             'text2' => " ",
+             'text3' => " ",
+            ]);
+
+            }
+            $admin_planet = Home::create([
+                'text' => $request->text,
+                'text2' => $request->text2,
+                'text3' => $request->text3,
+               ]);
+
+                return response() ->json([
+                    "status"=>true,
+                    "msg"=>"success planet data uploaded",
+                ]);
+
+        }
 
 }

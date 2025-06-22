@@ -5,6 +5,7 @@ import $ from 'jquery';
 
 
 const Planets = () => {
+    const [planetData,setPlanetData] = useState([]);
     //const [depData, setDepData] = useState([]);
 
     //onClick={() => navigate('/')}
@@ -15,27 +16,45 @@ const Planets = () => {
        });
 
     },[]);*/
+
     useEffect(()=>{
         if(window.innerHeight > 600){
             $('#footer' ).css("bottom","auto");
         }
+
+        axios.get('/api/get_planet/')
+        .then(resp => {
+            setPlanetData(resp.data);
+           console.log(resp.data);
+        })
     },[]);
 
     return(
         <div>
             <div>
-                <div className={planet.background}>
+                <div  className={planet.background}>
                 <h1 className="text-light text-center">P l a n e t s</h1>
-                <div className={"offset-md-1 "+planet.divCenter}>
-                    <p className={planet.textSize}>dddddddddddddd</p>
+                <div className={"container "+planet.divCenter}>
+                {
+                    planetData.map(planet=>{
+                        return(
+                            <div>
+                                <div className="my-2">
+                                <h2> {planet.text} </h2>
+                                </div>
+                            </div>
+                        )
+                    })
+                }
                 </div>
                 <br/><br/>
+
 
                 </div>
             </div>
 
-
         </div>
+
 
     );
 

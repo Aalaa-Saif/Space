@@ -18,7 +18,7 @@ function Footer(){
                             <span class={footer.footer_font}>aalaa.saif96@gmail.com</span>
                         </div>
                         <div class={"col-md-2 offset-md-8 mb-5 "+footer.footer_font}>
-                            &#169;2024
+                            &#169;2025
                         </div>
 
                     </div>
