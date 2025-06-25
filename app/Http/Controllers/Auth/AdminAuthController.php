@@ -6,6 +6,7 @@ use Auth;
 use File;
 use App\Models\Home;
 use App\Models\test;
+use App\Models\Admin;
 use App\Models\Planet;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,7 +19,7 @@ class AdminAuthController extends Controller
 
     }
 
-    public function profile(Request $request){
+    public function admin_profile(Request $request){
         // $admin = auth()->user();
        // $token = PersonalAccessToken::where('token', $hashedToken)->first();
        //$admin = auth('sanctum')->user();
@@ -106,5 +107,60 @@ class AdminAuthController extends Controller
                 ]);
 
         }
+
+         #for edit profile photo
+    public function editAdminPhoto(Request $request){
+        $profile_update = Admin::find($request->id);
+        if(!$profile_update)
+        return response()->json([
+            "status"=>false,
+            "msg"=>"ID not Found"
+        ]);
+
+        if($request->has('photo')){
+            $path = public_path('/img/admin/img/'.$profile_update->photo);
+            if(File::exists($path)){
+                File::delete($path);
+            }
+           $img = $request->file('photo');
+           $img_ext = $img->extension();
+           $img_name = time().rand(1,4000).'.'.$img_ext;
+           $path = 'img/admin/img/';
+           $img ->move($path,$img_name);
+        }
+        else {
+            $img_name = $profile_update->photo;
+        }
+
+        $profile_update->photo = $img_name;
+        $profile_update->update();
+        return response()->json([
+            "status"=>true,
+            "msg"=>__('Photo Updated Successfully')
+        ]);
+    }
+
+     #for edit profile name
+     public function editAdminName(Request $request){
+        $profile_update = Admin::find($request->id);
+        if(!$profile_update)
+        return response()->json([
+            "status"=>false,
+            "msg"=>"ID not Found"
+        ]);
+        if($request->name != null){
+            $profile_update->name = $request->name;
+        }
+        else{
+            $profile_update->name = $profile_update->name;
+        }
+        $profile_update->update();
+
+        return response()->json([
+            "status"=>true,
+            "msg"=>__('Name Updated Successfully')
+        ]);
+
+    }
 
 }

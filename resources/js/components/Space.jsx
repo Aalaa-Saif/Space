@@ -6,6 +6,7 @@ import Home from "./page/Home";
 import Planets from "./page/Planets";
 import AdminLogin from "./page/AdminLogin";
 import Dashboard from "./pageAuthAdmin/Dashboard";
+import EditAdminProfile from "./pageAuthAdmin/editAdminProfile";
 import ForHome from "./pageAuthAdmin/ForHome";
 import ForPlanet from "./pageAuthAdmin/ForPlanet";
 import Profile from "./pageAuthUser/Profile";
@@ -37,6 +38,7 @@ const Space = () => {
 
                 <Route element={<AdminLayout/>}>
                     <Route path="/dashboard" element={<Dashboard/>} />
+                    <Route path="/editAdminProfile" element={<EditAdminProfile/>} />
                     <Route path="/forHome" element={<ForHome/>} />
                     <Route path="/forPlanet" element={<ForPlanet/>} />
                 </Route>

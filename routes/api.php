@@ -31,7 +31,9 @@ use App\Http\Controllers\AuthUser\RegisterUserController;
     Route::post('/login_check',[LoginController::class,'login_check']);
 
     Route::group(['middleware' => 'auth:sanctum','type.admin'], function() {
-        Route::get('/admin_profile',[AdminAuthController::class,'profile']);
+        Route::get('/admin_profile',[AdminAuthController::class,'admin_profile']);
+        Route::post('/admin_editPhoto',[AdminAuthController::class,'editAdminPhoto']);
+        Route::post('/admin_editName',[AdminAuthController::class,'editAdminName']);
         Route::post('/admin_store_planet',[AdminAuthController::class,'store_planet']);
         Route::post('/admin_store_home',[AdminAuthController::class,'store_home']);
 
@@ -42,9 +44,6 @@ use App\Http\Controllers\AuthUser\RegisterUserController;
     Route::post('/user_register',[RegisterUserController::class,'register']);
     Route::post('/user_check',[LoginUserController::class,'user_check']);
 
-    Route::group(['middleware' => 'auth:sanctum','type.admin'], function() {
-        Route::post('/planet_data',[AdminAuthController::class,'planetData']);
-    });
 
     Route::group(['middleware' => 'auth:sanctum','type.user'], function() {
         Route::post('/user_profile',[UserAuthController::class,'profile']);

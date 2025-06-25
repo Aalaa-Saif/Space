@@ -15,6 +15,7 @@ const ForPlanet = () => {
         forceUpdate();
     }
 
+
     return(
         <div  className={"contentMove "+dashboard.cardMove}>
 

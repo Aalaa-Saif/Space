@@ -5,12 +5,33 @@
 .card{
     border: 1px solid aliceblue;
     width: 400px;
+    height: 120px;
+    padding: 10px 0px 5px 10px;
 }
 .divLeft{
     float: left;
 }
 .divRight{
-    margin-left: 40px;
+    margin-left: 140px;
+}
+
+.edit{
+    width: 12px;
+    height: 12px;
+    float: right;
+    margin-top: -30px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.editProfileForm{
+    border: 1px solid white;
+    margin-top: 60px;
+}
+
+.imgProfile{
+    width: 100px;
+    height: 100px;
 }
 
 @media only screen and (max-width: 700px){
